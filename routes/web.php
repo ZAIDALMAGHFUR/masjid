@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\kasController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TextController;
@@ -43,6 +44,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('edit-text/{id}', [TextController::class, 'edit']);
     Route::put('edit-text/{id}', [TextController::class, 'update']);
     Route::get('destroy/{id}', [TextController::class, 'destroy']);
+    Route::get('kas', [kasController::class, 'kas']);
+    Route::get('add-kass', [kasController::class, 'add']);
+    Route::post('add-kas', [kasController::class, 'store']);
+    Route::get('destroy/{id}', [kasController::class, 'destroy']);
     Route::get('dasbor', function () {
         return view('dasbor');
     });

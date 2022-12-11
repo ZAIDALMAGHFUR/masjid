@@ -154,7 +154,7 @@ nav.open ~ .overlay {
               </a>
             </li>
             <li class="list">
-              <a href="#" class="nav-link">
+              <a href="kas" class="nav-link">
                 <i class="bx bx-folder-open icon"></i>
                 <span class="link">KAS MASJID</span>
               </a>
