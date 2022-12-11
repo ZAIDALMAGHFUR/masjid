@@ -9,9 +9,11 @@ class kasController extends Controller
 {
     public function kas()
     {
+        $total_pemasukan = Kas::where('jenis_transaksi', 'uang masuk')->sum('jumlah');
+        $total_pengeluan = Kas::where('jenis_transaksi', 'uang keluar')->sum('jumlah');
         $kas = Kas::all();
         return view('kas', [
-            'kas' => $kas]);
+            'kas' => $kas, 'total_pemasukan' => $total_pemasukan, 'total_pengeluan' => $total_pengeluan]);
     }
 
     public function add()

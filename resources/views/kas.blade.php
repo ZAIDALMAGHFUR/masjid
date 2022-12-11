@@ -40,6 +40,16 @@
                             </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                            <tr>
+                                <td  class="text-center">Total Pemasukan</td>
+                                <td>Rp.{{ $total_pemasukan }}</td>
+                            </tr>
+                            <tr>
+                                <td  class="text-center">Total pengeluan</td>
+                                <td>Rp.{{ $total_pengeluan }}</td>
+                            </tr>
+                    </tfoot>
                 </table>
             </div>
     </div>

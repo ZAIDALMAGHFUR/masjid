@@ -135,12 +135,12 @@ nav.open ~ .overlay {
 
         <div class="sidebar-content">
           <ul class="lists">
-            <li class="list">
+            {{-- <li class="list">
               <a href="dasbor" class="nav-link">
                 <i class="bx bx-home-alt icon"></i>
                 <span class="link">DASHBOARD</span>
               </a>
-            </li>
+            </li> --}}
             <li class="list">
               <a href="infomasi" class="nav-link">
                 <i class="bx bx-bell icon"></i>
