@@ -6,13 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @vite('resources/css/app.css')
   <script src="https://cdn.tailwindcss.com"></script>
+  <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 </head>
 <style>
-    body,html {
-    margin: 0;
-    padding: 0;
-    background-color: #12181B;
-}
 
 .container {
     display: flex;
@@ -34,28 +30,6 @@
     -webkit-text-fill-color: transparent; 
     -moz-text-fill-color: transparent;
 }
-
-.controls {
-    margin-top: 16px;
-}
-
-.button {
-    font-weight: bold;
-    border-radius: 5px;
-    border: none;
-    color: white;
-    padding: 4px 8px;
-    margin-left: 4px;
-    cursor: pointer;
-}
-
-.set-alarm {
-    background-color: #498AFB;
-}
-
-.clear-alarm {
-    background-color: #FF3860;
-}
 </style>
 <body class="bg-[url({{ asset('/') }}asset/p.jpg)] bg-cover h-screen">
     <div class="flex justify-between">
@@ -69,16 +43,14 @@
         </div>
     </div>
 
+<div class="backdrop-blur-lg rounded-lg">
     <section class="container">
         <div id="clock"></div>
+        <h1 class="text-white -mt-10">{{ $response->data->jadwal[$d-1]->tanggal }}</h1>
     </section>
+</div>
     <script>
         const display = document.getElementById('clock');
-const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3');
-audio.loop = true;
-let alarmTime = null;
-let alarmTimeout = null;
-
 function updateTime() {
     const date = new Date();
 
@@ -98,65 +70,57 @@ function formatTime(time) {
     return time;
 }
 
-function setAlarmTime(value) {
-    alarmTime = value;
-}
-
-function setAlarm() {
-    if(alarmTime) {
-        const current = new Date();
-        const timeToAlarm = new Date(alarmTime);
-
-        if (timeToAlarm > current) {
-            const timeout = timeToAlarm.getTime() - current.getTime();
-            alarmTimeout = setTimeout(() => audio.play(), timeout);
-            alert('Alarm set');
-        }
-    }
-}
-
-function clearAlarm() {
-    audio.pause();
-    if (alarmTimeout) {
-        clearTimeout(alarmTimeout);
-        alert('Alarm cleared');
-    }
-}
-
 setInterval(updateTime, 1000);
     </script>
     <div class="flex justify-center items-center">
         <marquee behavior="" direction="" class=" font-semibold text-3xl text-teal-500">{{ $text[0]->text }}</marquee>
     </div>
 
-    <div class="flex justify-center mt-[9.8rem]">
-        <div class="m-16 text-xl font-extrabold">
-            <h1 class="text-white">Subuh</h1>
-            <h1 class="text-white">{{ $response->data->jadwal[0]->subuh }}</h1>
+    <div class="flex justify-center mt-[9rem]">
+        <div class="backdrop-blur-lg m-5 rounded-lg">
+            <div class="m-10 text-xl font-extrabold">
+                <h1 class="text-white">Subuh</h1>
+                <h1 class="text-white">{{ $response->data->jadwal[$d-1]->subuh }}</h1>
+            </div>
         </div>
-        <div class="m-16 text-xl font-extrabold">
-            <h1 class="text-white">Duhah</h1>
-            <h1 class="text-white">{{ $response->data->jadwal[0]->dhuha }}</h1>
+        <div class="backdrop-blur-lg m-5 rounded-lg">
+            <div class="m-10 text-xl font-extrabold">
+                <h1 class="text-white">Duhah</h1>
+                <h1 class="text-white flex justify-center">{{ $response->data->jadwal[$d-1]->dhuha }}</h1>
+            </div>
         </div>
-        <div class="m-16 text-xl font-extrabold">
-            <h1 class="text-white">Dzuhur</h1>
-            <h1 class="text-white">{{ $response->data->jadwal[0]->dzuhur }}</h1>
+        <div class="backdrop-blur-lg m-5 rounded-lg">
+            <div class="m-10 text-xl font-extrabold">
+                <h1 class="text-white">Dzuhur</h1>
+                <h1 class="text-white flex justify-center">{{ $response->data->jadwal[$d-1]->dzuhur }}</h1>
+            </div>
         </div>
-        <div class="m-16 text-xl font-extrabold">
-            <h1 class="text-white">Ashar</h1>
-            <h1 class="text-white">{{ $response->data->jadwal[0]->ashar }}</h1>
+        <div class="backdrop-blur-lg m-5 rounded-lg">
+            <div class="m-10 text-xl font-extrabold">
+                <h1 class="text-white">Ashar</h1>
+                <h1 class="text-white">{{ $response->data->jadwal[$d-1]->ashar }}</h1>
+            </div>
         </div>
-        <div class="m-16 text-xl font-extrabold">
-            <h1 class="text-white">Maghrib</h1>
-            <h1 class="text-white">{{ $response->data->jadwal[0]->maghrib }}</h1>
+        <div class="backdrop-blur-lg m-5 rounded-lg">
+            <div class="m-10 text-xl font-extrabold">
+                <h1 class="text-white">Maghrib</h1>
+                <h1 class="text-white flex justify-center">{{ $response->data->jadwal[$d-1]->maghrib }}</h1>
+            </div>
         </div>
-        <div class="m-16 text-xl font-extrabold">
-            <h1 class="text-white">Isya</h1>
-            <h1 class="text-white">{{ $response->data->jadwal[0]->isya }}</h1>
+        <div class="backdrop-blur-lg m-5 rounded-lg">
+            <div class="m-10 text-xl font-extrabold">
+                <h1 class="text-white flex justify-center">Isya</h1>
+                <h1 class="text-white">{{ $response->data->jadwal[$d-1]->isya }}</h1>
+            </div>
         </div>
     </div>
-    <div>
-        <h1 class="text-white text-2xl text-end font-extraboldt">No Handphone : {{ $masjids[0]->no_telp }}</h1>    
+    <div class="flex justify-between">
+        <div class="backdrop-blur-lg m-5 w rounded-lg-14 rounded-lg ml-5 flex justify-center">
+            <a href="login" class="text-white w-20 h-7 flex justify-center">login</a>
+        </div>
+        <div>
+            <h1 class="text-white text-2xl">No Handphone : {{ $masjids[0]->no_telp }}</h1>    
+        </div>
     </div>
 </body>
 </html> 
