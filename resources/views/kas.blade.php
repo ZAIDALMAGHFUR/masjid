@@ -41,11 +41,11 @@
                         @endforeach
                     </tbody>
                     <tfoot>
-                            <tr>
+                            <tr class="text-success">
                                 <td  class="text-center">Total Pemasukan</td>
                                 <td>Rp.{{ $total_pemasukan }}</td>
                             </tr>
-                            <tr>
+                            <tr class="text-danger">
                                 <td  class="text-center">Total pengeluan</td>
                                 <td>Rp.{{ $total_pengeluan }}</td>
                             </tr>
