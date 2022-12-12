@@ -21,7 +21,7 @@ class HomeController extends Controller
         $response = json_decode(Http::get("https://api.myquran.com/v1/sholat/jadwal/0228/2022/12"));
         $masjids = NamaMasjid::all();
         $text = json_decode(Text::all());
-
+        
 
         $jadwal = $response->data->jadwal;
         $jam_subuh = (int)substr($jadwal[$d-1]->subuh, 0, 2);
@@ -40,6 +40,9 @@ class HomeController extends Controller
         // dd($jam_ashar);
 
 //  dd($jam_maghrib);
+
+// $h = $h + 2;
+// $m = $m - 31;
         return view('welcome', compact(['response', 'masjids', 'text', 'd','h', 'm', 'y' , 'total_pemasukan', 'total_pengeluan', 'jam_subuh', 'jam_dhuha', 'jam_dzuhur', 'jam_ashar', 'jam_maghrib', 'jam_isya', 'menit_subuh', 'menit_dhuha', 'menit_dzuhur', 'menit_ashar', 'menit_maghrib', 'menit_isya']));
     }
 }

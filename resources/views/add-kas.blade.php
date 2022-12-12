@@ -27,5 +27,9 @@
             <button type="submit" class="btn btn-primary mt-5" >Submit</button>
         </div>
     </form>
+    <div>
+        <h1 style="font-size: 1rem; margin-top: 7rem">1. Jenis Transaksi hanya bisa di isi dengan <span>uang masuk</span> dan <span>uang keluar</span></h1>
+        <h1 style="font-size: 1rem;">2. Jumlah di tulis tampa ada titik</h1>
+    </div>
 </div>
 @endsection
