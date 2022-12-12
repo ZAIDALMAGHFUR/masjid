@@ -39,6 +39,7 @@ class HomeController extends Controller
         // dd($jadwal);
         // dd($jam_ashar);
 
+//  dd($jam_maghrib);
         return view('welcome', compact(['response', 'masjids', 'text', 'd','h', 'm', 'y' , 'total_pemasukan', 'total_pengeluan', 'jam_subuh', 'jam_dhuha', 'jam_dzuhur', 'jam_ashar', 'jam_maghrib', 'jam_isya', 'menit_subuh', 'menit_dhuha', 'menit_dzuhur', 'menit_ashar', 'menit_maghrib', 'menit_isya']));
     }
 }

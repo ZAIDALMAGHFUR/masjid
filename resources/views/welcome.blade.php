@@ -97,7 +97,7 @@ setInterval(updateTime, 1000);
                         <span class="text-white">Jadwal selanjutnya</span>
                     @endif
                 @endif --}}
-                @if ($h <= $jam_subuh)
+                {{-- @if ($h <= $jam_subuh)
                     @if ($m <= $menit_subuh)
                         <span class="text-white">Jadwal selanjutnya</span>
                         @else
@@ -105,6 +105,12 @@ setInterval(updateTime, 1000);
                     @endif
                     @else
                         <span class="text-white">udah lewat woi</span>
+                @endif --}}
+                @if ($h <= $jam_subuh || $h >= $jam_isya)
+                    @if ($h == $jam_subuh && $m >= $menit_subuh )
+                        @else
+                        <span class="text-white">Jadwal selanjutnya</span>
+                    @endif
                 @endif
             </div>
         </div>
@@ -117,7 +123,7 @@ setInterval(updateTime, 1000);
                         <span class="text-white">Jadwal selanjutnya</span>
                     @endif
                 @endif --}}
-                @if ($h <= $jam_dhuha)
+                {{-- @if ($h <= $jam_dhuha)
                     @if ($m <= $menit_dhuha)
                         <span class="text-white">Jadwal selanjutnya</span>
                         @else
@@ -125,6 +131,14 @@ setInterval(updateTime, 1000);
                     @endif
                     @else
                         <span class="text-white">udah lewat woi</span>
+                @endif --}}
+
+                @if ($h <= $jam_dhuha && $h >= $jam_subuh)
+                    @if ($h = $jam_subuh && $m >= $menit_subuh )
+                        @else
+                        <span class="text-white
+                        ">Jadwal selanjutnya</span>
+                    @endif
                 @endif
             </div>
         </div>
@@ -138,7 +152,7 @@ setInterval(updateTime, 1000);
                         <span class="text-white">Jadwal selanjutnya</span>
                     @endif
                 @endif --}}
-                @if ($h <= $jam_dzuhur)
+                {{-- @if ($h <= $jam_dzuhur)
                     @if ($m <= $menit_dzuhur)
                         <span class="text-white">Jadwal selanjutnya</span>
                         @else
@@ -146,6 +160,13 @@ setInterval(updateTime, 1000);
                     @endif
                     @else
                         <span class="text-white">udah lewat woi</span>
+                @endif --}}
+                @if ($h <= $jam_dzuhur && $h >= $jam_dhuha)
+                    @if ($h = $jam_dhuha && $m >= $menit_dhuha )
+                        @else
+                        <span class="text-white
+                        ">Jadwal selanjutnya</span>
+                    @endif
                 @endif
             </div>
         </div>
@@ -153,39 +174,28 @@ setInterval(updateTime, 1000);
             <div class="m-10 text-xl font-extrabold">
                 <h1 class="text-white">Ashar</h1>
                 <h1 class="text-white">{{ $response->data->jadwal[$d-1]->ashar }}</h1>
-                {{-- {{ "jam" . $jam_ashar . 'menit: ' . $m; }} --}}
-                @if ($h <= $jam_ashar)
-                    @if ($m <= $menit_ashar)
+                @if ($h <= $jam_ashar && $h >= $jam_dzuhur)
+                    @if ($h = $jam_ashar && $m >= $menit_ashar )
+                        @else
                         <span class="text-white">Jadwal selanjutnya</span>
-                        {{-- @else
-                        <span class="text-white">udah lewat woi</span> --}}
                     @endif
-                    {{-- @else
-                        <span class="text-white">udah lewat woi</span> --}}
                 @endif
+
             </div>
         </div>
         <div class="backdrop-blur-lg m-5 rounded-lg">
             <div class="m-10 text-xl font-extrabold">
                 <h1 class="text-white">Maghrib</h1>
                 <h1 class="text-white flex justify-center">{{ $response->data->jadwal[$d-1]->maghrib }}</h1>
-                {{-- @if ($h <= $jam_maghrib && $h >= $jam_ashar)
-                    @if ($m <= $menit_maghrib && $m >= $menit_ashar)
-                        @else
-                        <span class="text-white">Jadwal selanjutnya</span>
-                    @endif
-                @else
-                    
-                @endif --}}
-                @if ($h <= $jam_maghrib)
-                    @if ($m <= $menit_maghrib)
-                        <span class="text-white">Jadwal selanjutnya</span>
-                        @else
-                        <span class="text-white">udah lewat woi</span>
-                    @endif
+                @if ($h <= $jam_maghrib && $h >= $jam_ashar)
+                    @if ($h == $jam_maghrib && $m >= $menit_maghrib )
+
                     @else
-                        <span class="text-white">udah lewat woi</span>
+                        <span class="text-white">Jadwal selanjutnya</span>
+                    @endif
                 @endif
+                
+
             </div>
         </div>
         <div class="backdrop-blur-lg m-5 rounded-lg">
@@ -198,7 +208,7 @@ setInterval(updateTime, 1000);
                         <span class="text-white">Jadwal selanjutnya</span>
                     @endif
                 @endif --}}
-                @if ($h <= $jam_isya)
+                {{-- @if ($h <= $jam_isya)
                     @if ($m <= $menit_isya)
                         <span class="text-white">Jadwal selanjutnya</span>
                         @else
@@ -206,6 +216,12 @@ setInterval(updateTime, 1000);
                     @endif
                     @else
                         <span class="text-white">udah lewat woi</span>
+                @endif --}}
+                @if ($h <= $jam_isya && $h >= $jam_maghrib)
+                    @if ($h = $jam_isya && $m >= $menit_isya )
+                        @else
+                        <span class="text-white">Jadwal selanjutnya</span>
+                    @endif
                 @endif
             </div>
         </div>
