@@ -49,6 +49,10 @@
                                 <td  class="text-center">Total pengeluan</td>
                                 <td>Rp.{{ $total_pengeluan }}</td>
                             </tr>
+                            <tr style="color: black">
+                                <td  class="text-center">Jumblah Akhir</td>
+                                <td>Rp.{{ $jumblah_akhir }}</td>
+                            </tr>
                     </tfoot>
                 </table>
             </div>

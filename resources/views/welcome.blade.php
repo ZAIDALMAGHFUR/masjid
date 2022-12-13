@@ -8,6 +8,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></sc
   <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 {{-- <div>
     <style>
@@ -185,7 +186,9 @@
     padding: 0;
     font-family: 'Poppins', sans-serif;
   }
-
+  body {
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
+}
   .wrapper{
     height: 100px;
     width: 360px;
@@ -300,6 +303,7 @@
         <div class="m-2 mr-8">
             <h1 class="text-black font-bold text-lg">Total Pemasukan Rp.{{ $total_pemasukan }}</h1>
             <h1 class="text-red-500 font-bold text-lg">Total Pengeluaran Rp.{{ $total_pengeluan }}</h1>
+            {{--<h1 class="text-black font-bold text-lg">Jumlah Kas Akhir Rp.{{ $jumblah_akhir }}</h1>--}}
             <a href="login" class="flex items-center">
                 <box-icon type='solid' name='cog'></box-icon> 
                 <span class="ml-3">Setting</span> 
@@ -321,8 +325,6 @@
                 <div class="display">
                 <div id="time"></div>
                 </div>
-                <span></span>
-                <span></span>
             </div>
             <p class="text-white flex justify-center items-center font-extrabold text-lg">{{$response->data->jadwal[$d-1]->tanggal}}</p>
         </div>
@@ -332,13 +334,39 @@
         <div class="flex justify-center items-center">
             <div class=" flex items-center m-10">
                 <div class="h-[9rem] w-[15rem] backdrop-blur-lg  rounded-lg flex items-center">
-            <div> 
+            <div class="m-14"> 
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">Subuh</h1>
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">{{ $response->data->jadwal[$d-1]->subuh }}</h1>
                 @if ($h <= $jam_subuh || $h >= $jam_isya)
                     @if ($h == $jam_subuh && $m >= $menit_subuh )
+                            @if ($h == $jam_subuh &&  $m == $menit_subuh) 
+                                        <script>
+                                let timerInterval 
+                                        Swal.fire({
+                                        title: 'Waktu Nya Adzan!',
+                                        html: 'Iqomah Akan Datang Dalam  <b></b> milliseconds.',
+                                        timer: 300000,
+                                        timerProgressBar: true,
+                                        didOpen: () => {
+                                            Swal.showLoading()
+                                            const b = Swal.getHtmlContainer().querySelector('b')
+                                            timerInterval = setInterval(() => {
+                                            b.textContent = Swal.getTimerLeft()
+                                            }, 100)
+                                        },
+                                        willClose: () => {
+                                            clearInterval(timerInterval)
+                                        }
+                                        }).then((result) => {
+                                        /* Read more about handling dismissals below */
+                                        if (result.dismiss === Swal.DismissReason.timer) {
+                                            console.log('I was closed by the timer')
+                                        }
+                                        })
+                                </script>
+                            @endif
                         @else
-                        <span class="text-white font-extrabold text-xl m-7">Jadwal selanjutnya</span>
+                        <span class="text-white font-extrabold text-xl m-10">Jadwal selanjutnya</span>
                     @endif
                 @endif
             </div>
@@ -352,7 +380,33 @@
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">Dhuha</h1>
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">{{ $response->data->jadwal[$d-1]->dhuha }}</h1>
                 @if ($h <= $jam_dhuha && $h >= $jam_subuh)
-                        @if ($h = $jam_subuh && $m >= $menit_subuh )
+                        @if ($h = $jam_dhuha && $m >= $menit_dhuha )
+                            @if ($h == $jam_dhuha && $m == $menit_dhuha)
+                                <script>
+                                let timerInterval 
+                                        Swal.fire({
+                                        title: 'Waktu Nya Adzan!',
+                                        html: 'Iqomah Akan Datang Dalam  <b></b> milliseconds.',
+                                        timer: 300000,
+                                        timerProgressBar: true,
+                                        didOpen: () => {
+                                            Swal.showLoading()
+                                            const b = Swal.getHtmlContainer().querySelector('b')
+                                            timerInterval = setInterval(() => {
+                                            b.textContent = Swal.getTimerLeft()
+                                            }, 100)
+                                        },
+                                        willClose: () => {
+                                            clearInterval(timerInterval)
+                                        }
+                                        }).then((result) => {
+                                        /* Read more about handling dismissals below */
+                                        if (result.dismiss === Swal.DismissReason.timer) {
+                                            console.log('I was closed by the timer')
+                                        }
+                                        })
+                                </script>
+                            @endif
                             @else
                             <span class="text-white font-extrabold text-xl m-7">Jadwal selanjutnya</span>
                         @endif
@@ -367,7 +421,33 @@
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">Dzuhur</h1>
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">{{ $response->data->jadwal[$d-1]->dzuhur }}</h1>
                 @if ($h <= $jam_dzuhur && $h >= $jam_dhuha)
-                        @if ($h = $jam_dhuha && $m >= $menit_dhuha )
+                        @if ($h == $jam_dzuhur && $m >= $menit_dzuhur )
+                            @if ($h == $jam_dzuhur && $m == $menit_dzuhur)
+                                <script>
+                                let timerInterval 
+                                        Swal.fire({
+                                        title: 'Waktu Nya Adzan!',
+                                        html: 'Iqomah Akan Datang Dalam  <b></b> milliseconds.',
+                                        timer: 300000,
+                                        timerProgressBar: true,
+                                        didOpen: () => {
+                                            Swal.showLoading()
+                                            const b = Swal.getHtmlContainer().querySelector('b')
+                                            timerInterval = setInterval(() => {
+                                            b.textContent = Swal.getTimerLeft()
+                                            }, 100)
+                                        },
+                                        willClose: () => {
+                                            clearInterval(timerInterval)
+                                        }
+                                        }).then((result) => {
+                                        /* Read more about handling dismissals below */
+                                        if (result.dismiss === Swal.DismissReason.timer) {
+                                            console.log('I was closed by the timer')
+                                        }
+                                        })
+                                </script>
+                            @endif
                             @else
                             <span class="text-white font-extrabold text-xl m-7">Jadwal selanjutnya</span>
                         @endif
@@ -377,6 +457,8 @@
             </div>
         </div>
 
+
+
         <div class="flex justify-center items-center">
             <div class="flex items-center m-10">
                 <div class="h-[9rem] w-[15rem] backdrop-blur-lg  rounded-lg flex items-center">
@@ -384,7 +466,33 @@
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">Ashar</h1>
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">{{ $response->data->jadwal[$d-1]->ashar }}</h1>
                 @if ($h <= $jam_ashar && $h >= $jam_dzuhur)
-                        @if ($h = $jam_ashar && $m >= $menit_ashar )
+                        @if ($h == $jam_ashar && $m >= $menit_ashar )
+                            @if ($h == $jam_ashar && $m == $menit_ashar)
+                                <script>
+                                let timerInterval 
+                                        Swal.fire({
+                                        title: 'Waktu Nya Adzan!',
+                                        html: 'Iqomah Akan Datang Dalam  <b></b> milliseconds.',
+                                        timer: 300000,
+                                        timerProgressBar: true,
+                                        didOpen: () => {
+                                            Swal.showLoading()
+                                            const b = Swal.getHtmlContainer().querySelector('b')
+                                            timerInterval = setInterval(() => {
+                                            b.textContent = Swal.getTimerLeft()
+                                            }, 100)
+                                        },
+                                        willClose: () => {
+                                            clearInterval(timerInterval)
+                                        }
+                                        }).then((result) => {
+                                        /* Read more about handling dismissals below */
+                                        if (result.dismiss === Swal.DismissReason.timer) {
+                                            console.log('I was closed by the timer')
+                                        }
+                                        })
+                                </script>
+                            @endif
                             @else
                             <span class="text-white font-extrabold text-xl m-7">Jadwal selanjutnya</span>
                         @endif
@@ -401,9 +509,33 @@
                 @if ($h <= $jam_maghrib && $h >= $jam_ashar)
                         @if ($h == $jam_maghrib && $m >= $menit_maghrib )
                         @if ($h = $jam_maghrib &&  $m = $menit_maghrib)
+                            <script>
+                                let timerInterval
+                                        Swal.fire({
+                                        title: 'Waktu Nya Adzan!',
+                                        html: 'Iqomah Akan Datang Dalam  <b></b> milliseconds.',
+                                        timer: 20000,
+                                        timerProgressBar: true,
+                                        didOpen: () => {
+                                            Swal.showLoading()
+                                            const b = Swal.getHtmlContainer().querySelector('b')
+                                            timerInterval = setInterval(() => {
+                                            b.textContent = Swal.getTimerLeft()
+                                            }, 100)
+                                        },
+                                        willClose: () => {
+                                            clearInterval(timerInterval)
+                                        }
+                                        }).then((result) => {
+                                        /* Read more about handling dismissals below */
+                                        if (result.dismiss === Swal.DismissReason.timer) {
+                                            console.log('I was closed by the timer')
+                                        }
+                                        })
+                            </script>
                         @endif
                         @else
-                            <span class="ttext-white font-extrabold text-xl m-7">Jadwal selanjutnya</span>
+                            <span class="text-white font-extrabold text-xl m-7">Jadwal selanjutnya</span>
                         @endif
                     @endif
             </div>
@@ -417,6 +549,32 @@
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">{{ $response->data->jadwal[$d-1]->isya }}</h1>
                 @if ($h <= $jam_isya && $h >= $jam_maghrib)
                         @if ($h = $jam_isya && $m >= $menit_isya )
+                                @if ($h = $jam_isya &&  $m = $menit_isya) 
+                                        <script>
+                                let timerInterval
+                                        Swal.fire({
+                                        title: 'Waktu Nya Adzan!',
+                                        html: 'Iqomah Akan Datang Dalam  <b></b> milliseconds.',
+                                        timer: 300000,
+                                        timerProgressBar: true,
+                                        didOpen: () => {
+                                            Swal.showLoading()
+                                            const b = Swal.getHtmlContainer().querySelector('b')
+                                            timerInterval = setInterval(() => {
+                                            b.textContent = Swal.getTimerLeft()
+                                            }, 100)
+                                        },
+                                        willClose: () => {
+                                            clearInterval(timerInterval)
+                                        }
+                                        }).then((result) => {
+                                        /* Read more about handling dismissals below */
+                                        if (result.dismiss === Swal.DismissReason.timer) {
+                                            console.log('I was closed by the timer')
+                                        }
+                                        })
+                                </script>
+                                @endif
                             @else
                             <span class="text-white font-extrabold text-xl m-7">Jadwal selanjutnya</span>
                         @endif
