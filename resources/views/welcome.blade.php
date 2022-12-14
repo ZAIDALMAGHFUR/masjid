@@ -10,176 +10,7 @@
   <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-{{-- <div>
-    <style>
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        #clock {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 7rem;
-            background-image: linear-gradient(180deg,
-                rgba(99,253,136,1) 0%,
-                rgba(51,197,142,1) 50%,
-                rgba(39,97,116,1) 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -moz-background-clip: text;
-            -webkit-text-fill-color: transparent; 
-            -moz-text-fill-color: transparent;
-        }
-        </style>
-</div> --}}
 <body class="bg-[url({{ asset('/') }}asset/q.jpg)] bg-cover h-screen">
-<div>
-    <div>
-
-        {{-- <div class="flex justify-between">
-            <div class="m-5">
-                <h1 class="text-white text-2xl flex justify-center items-center">{{ $masjids[0]->nama_masjid }} {{ $response->data->lokasi }}</h1>
-                <h1 class="text-white">{{ $masjids[0]->alamat_masjid }}</h1>
-            </div>
-    
-            <div class="font-bold text-xl m-5">
-                <div class="mr-4">
-                    <h1 class="text-green-500">Total Pemasukan Rp.{{ $total_pemasukan }}</h1>
-                </div>
-                <div>
-                    <h1 class="text-red-600">Total Pengeluaran Rp.{{ $total_pengeluan }}</h1>
-                </div>
-            </div>
-        </div>
-    
-    <div class="backdrop-blur-lg rounded-lg">
-        <section class="container">
-            <div id="clock"></div>
-            <h1 class="text-white -mt-10">{{ $response->data->jadwal[$d-1]->tanggal }}</h1>
-        </section>
-    </div>
-        <script>
-            const display = document.getElementById('clock');
-    function updateTime() {
-        const date = new Date();
-    
-        const hour = formatTime(date.getHours());
-        const minutes = formatTime(date.getMinutes());
-        const seconds = formatTime(date.getSeconds());
-    
-    
-    
-        display.innerText=`${hour} : ${minutes} : ${seconds}`
-    }
-    
-    function formatTime(time) {
-        if ( time < 10 ) {
-            return '0' + time;
-        }
-        return time;
-    }
-    
-    setInterval(updateTime, 1000);
-        </script>
-        <div class="flex justify-center items-center">
-            <marquee behavior="" direction="" class=" font-semibold text-3xl text-teal-500">{{ $text[0]->text }}</marquee>
-        </div>
-    
-    
-    
-        <div class="flex justify-center mt-[9rem]">
-            <div class="backdrop-blur-lg m-5 rounded-lg">
-                <div class="m-10 text-xl font-extrabold">
-                    <h1 class="text-white">Subuh</h1>
-                    <h1 class="text-white">{{ $response->data->jadwal[$d-1]->subuh }}</h1>
-    
-                    @if ($h <= $jam_subuh || $h >= $jam_isya)
-                        @if ($h == $jam_subuh && $m >= $menit_subuh )
-                            @else
-                            <span class="text-white">Jadwal selanjutnya</span>
-                        @endif
-                    @endif
-                </div>
-            </div>
-            <div class="backdrop-blur-lg m-5 rounded-lg">
-                <div class="m-10 text-xl font-extrabold">
-                    <h1 class="text-white">Duhah</h1>
-                    <h1 class="text-white flex justify-center">{{ $response->data->jadwal[$d-1]->dhuha }}</h1>
-    
-                    @if ($h <= $jam_dhuha && $h >= $jam_subuh)
-                        @if ($h = $jam_subuh && $m >= $menit_subuh )
-                            @else
-                            <span class="text-white flex justify-center">Jadwal selanjutnya</span>
-                        @endif
-                    @endif
-                </div>
-            </div>
-            <div class="backdrop-blur-lg m-5 rounded-lg">
-                <div class="m-10 text-xl font-extrabold">
-                    <h1 class="text-white flex justify-center">Dzuhur</h1>
-                    <h1 class="text-white flex justify-center">{{ $response->data->jadwal[$d-1]->dzuhur }}</h1>
-                    @if ($h <= $jam_dzuhur && $h >= $jam_dhuha)
-                        @if ($h = $jam_dhuha && $m >= $menit_dhuha )
-                            @else
-                            <span class="text-white flex justify-center">Jadwal selanjutnya</span>
-                        @endif
-                    @endif
-                </div>
-            </div>
-            <div class="backdrop-blur-lg m-5 rounded-lg">
-                <div class="m-10 text-xl font-extrabold">
-                    <h1 class="text-white">Ashar</h1>
-                    <h1 class="text-white">{{ $response->data->jadwal[$d-1]->ashar }}</h1>
-                    @if ($h <= $jam_ashar && $h >= $jam_dzuhur)
-                        @if ($h = $jam_ashar && $m >= $menit_ashar )
-                            @else
-                            <span class="text-white flex justify-center">Jadwal selanjutnya</span>
-                        @endif
-                    @endif
-    
-                </div>
-            </div>
-            <div class="backdrop-blur-lg m-5 rounded-lg">
-                <div class="m-10 text-xl font-extrabold">
-                    <h1 class="text-white flex justify-center">Maghrib</h1>
-                    <h1 class="text-white flex justify-center">{{ $response->data->jadwal[$d-1]->maghrib }}</h1>
-                    @if ($h <= $jam_maghrib && $h >= $jam_ashar)
-                        @if ($h == $jam_maghrib && $m >= $menit_maghrib )
-                        @if ($h = $jam_maghrib &&  $m = $menit_maghrib)
-                        @endif
-                        @else
-                            <span class="text-white flex justify-center">Jadwal selanjutnya</span>
-                        @endif
-                    @endif
-                </div>
-            </div>
-            <div class="backdrop-blur-lg m-5 rounded-lg">
-                <div class="m-10 text-xl font-extrabold">
-                    <h1 class="text-white flex justify-center">Isya</h1>
-                    <h1 class="text-white flex justify-center">{{ $response->data->jadwal[$d-1]->isya }}</h1>
-                    @if ($h <= $jam_isya && $h >= $jam_maghrib)
-                        @if ($h = $jam_isya && $m >= $menit_isya )
-                            @else
-                            <span class="text-white flex justify-center">Jadwal selanjutnya</span>
-                        @endif
-                    @endif
-                </div>
-            </div>
-        </div>
-        <div class="flex justify-between">
-            <div class="backdrop-blur-lg m-5 w rounded-lg-14 rounded-lg ml-5 flex justify-center">
-                <a href="login" class="text-white w-20 h-7 flex justify-center">login</a>
-            </div>
-            <div class="mt-8">
-                <h1 class="text-white text-sm">No Handphone : {{ $masjids[0]->no_telp }}</h1>    
-            </div>
-        </div> --}}
-    </div>
-</div>
-
     <style type="text/css">
     *{
     margin: 0;
@@ -335,8 +166,44 @@
             <div class=" flex items-center m-10">
                 <div class="h-[9rem] w-[15rem] backdrop-blur-lg  rounded-lg flex items-center">
             <div class="m-14"> 
+                <audio id="MyAudioElement" autoplay>
+                    <source src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">Subuh</h1>
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">{{ $response->data->jadwal[$d-1]->subuh }}</h1>
+                <script>
+                                    let date = new Date();
+                                    let hours = date.getHours();
+                                    let minutes = date.getMinutes();
+                                    let seconds = date.getSeconds();  
+                                    
+                                            if (hours == {{$jam_subuh}} && minutes == {{$menit_subuh}}) {
+                                                console.log('berhasil_subuh');
+                                                Audio.prototype.play = (function(play) {
+                                                return function () {
+                                                var audio = this,
+                                                    args = arguments,
+                                                    promise = play.apply(audio, args);
+                                                if (promise !== undefined) {
+                                                    promise.catch(_ => {
+                                                    // Autoplay was prevented. This is optional, but add a button to start playing.
+                                                    // var el = document.createElement("button");
+                                                    // el.innerHTML = "Play";
+                                                    // el.addEventListener("click", function(){play.apply(audio, args);});
+                                                    // this.parentNode.insertBefore(el, this.nextSibling)
+                                                    });
+                                                }
+                                                };
+                                                })(Audio.prototype.play);
+
+                                                // Try automatically playing our audio via script. This would normally trigger and error.
+                                                document.getElementById('MyAudioElement').play()
+                                            } else {
+                                                console.log('gagal_shubuh');
+                                                    
+                                            }
+                                </script>
                 @if ($h <= $jam_subuh || $h >= $jam_isya)
                     @if ($h == $jam_subuh && $m >= $menit_subuh )
                             @if ($h == $jam_subuh &&  $m == $menit_subuh) 
@@ -377,8 +244,44 @@
             <div class=" flex items-center m-10">
                 <div class="h-[9rem] w-[15rem] backdrop-blur-lg  rounded-lg flex items-center">
             <div class="m-14"> 
+                <audio id="MyAudioElement" autoplay>
+                    <source src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">Dhuha</h1>
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">{{ $response->data->jadwal[$d-1]->dhuha }}</h1>
+                <script>
+                                    let date = new Date();
+                                    let hours = date.getHours();
+                                    let minutes = date.getMinutes();
+                                    let seconds = date.getSeconds();  
+                                    
+                                            if (hours == {{$jam_dhuha}} && minutes == {{$menit_dhuha}}) {
+                                                console.log('berhasil_dhuha');
+                                                Audio.prototype.play = (function(play) {
+                                                return function () {
+                                                var audio = this,
+                                                    args = arguments,
+                                                    promise = play.apply(audio, args);
+                                                if (promise !== undefined) {
+                                                    promise.catch(_ => {
+                                                    // Autoplay was prevented. This is optional, but add a button to start playing.
+                                                    // var el = document.createElement("button");
+                                                    // el.innerHTML = "Play";
+                                                    // el.addEventListener("click", function(){play.apply(audio, args);});
+                                                    // this.parentNode.insertBefore(el, this.nextSibling)
+                                                    });
+                                                }
+                                                };
+                                                })(Audio.prototype.play);
+
+                                                // Try automatically playing our audio via script. This would normally trigger and error.
+                                                document.getElementById('MyAudioElement').play()
+                                            } else {
+                                                console.log('gagal_dhuha');
+                                                    
+                                            }
+                                </script>
                 @if ($h <= $jam_dhuha && $h >= $jam_subuh)
                         @if ($h = $jam_dhuha && $m >= $menit_dhuha )
                             @if ($h == $jam_dhuha && $m == $menit_dhuha)
@@ -418,8 +321,44 @@
             <div class=" flex items-center ">
                 <div class="h-[9rem] w-[15rem] backdrop-blur-lg  rounded-lg flex items-center">
             <div class="m-14"> 
+                <audio id="MyAudioElement" autoplay>
+                    <source src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">Dzuhur</h1>
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">{{ $response->data->jadwal[$d-1]->dzuhur }}</h1>
+                <script>
+                                    let date = new Date();
+                                    let hours = date.getHours();
+                                    let minutes = date.getMinutes();
+                                    let seconds = date.getSeconds();  
+                                    
+                                            if (hours == {{$jam_dzuhur}} && minutes == {{$menit_dzuhur}}) {
+                                                console.log('berhasil_dzuhur');
+                                                Audio.prototype.play = (function(play) {
+                                                return function () {
+                                                var audio = this,
+                                                    args = arguments,
+                                                    promise = play.apply(audio, args);
+                                                if (promise !== undefined) {
+                                                    promise.catch(_ => {
+                                                    // Autoplay was prevented. This is optional, but add a button to start playing.
+                                                    var el = document.createElement("button");
+                                                    el.innerHTML = "Play";
+                                                    el.addEventListener("click", function(){play.apply(audio, args);});
+                                                    this.parentNode.insertBefore(el, this.nextSibling)
+                                                    });
+                                                }
+                                                };
+                                                })(Audio.prototype.play);
+
+                                                // Try automatically playing our audio via script. This would normally trigger and error.
+                                                document.getElementById('MyAudioElement').play()
+                                            } else {
+                                                console.log('gagal_dzuhur');
+                                                    
+                                            }
+                                </script>
                 @if ($h <= $jam_dzuhur && $h >= $jam_dhuha)
                         @if ($h == $jam_dzuhur && $m >= $menit_dzuhur )
                             @if ($h == $jam_dzuhur && $m == $menit_dzuhur)
@@ -463,11 +402,47 @@
             <div class="flex items-center m-10">
                 <div class="h-[9rem] w-[15rem] backdrop-blur-lg  rounded-lg flex items-center">
             <div class="m-14"> 
+                <audio id="MyAudioElement" autoplay>
+                    <source src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">Ashar</h1>
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">{{ $response->data->jadwal[$d-1]->ashar }}</h1>
+                                <script>
+                                    let date = new Date();
+                                    let hours = date.getHours();
+                                    let minutes = date.getMinutes();
+                                    let seconds = date.getSeconds();  
+                                    
+                                            if (hours == {{$jam_ashar}} && minutes == {{$menit_ashar}}) {
+                                                console.log('berhasil_ashar');
+                                                Audio.prototype.play = (function(play) {
+                                                return function () {
+                                                var audio = this,
+                                                    args = arguments,
+                                                    promise = play.apply(audio, args);
+                                                if (promise !== undefined) {
+                                                    promise.catch(_ => {
+                                                    // Autoplay was prevented. This is optional, but add a button to start playing.
+                                                    // var el = document.createElement("button");
+                                                    // el.innerHTML = "Play";
+                                                    // el.addEventListener("click", function(){play.apply(audio, args);});
+                                                    // this.parentNode.insertBefore(el, this.nextSibling)
+                                                    });
+                                                }
+                                                };
+                                                })(Audio.prototype.play);
+
+                                                // Try automatically playing our audio via script. This would normally trigger and error.
+                                                document.getElementById('MyAudioElement').play()
+                                            } else {
+                                                console.log('gagal_ashar');
+                                                    
+                                            }
+                                </script>
                 @if ($h <= $jam_ashar && $h >= $jam_dzuhur)
                         @if ($h == $jam_ashar && $m >= $menit_ashar )
-                            @if ($h == $jam_ashar && $m == $menit_ashar)
+                        @if ($h == $jam_ashar && $m == $menit_ashar)
                                 <script>
                                 let timerInterval 
                                         Swal.fire({
@@ -504,8 +479,45 @@
             <div class="flex items-center m-10">
                 <div class="h-[9rem] w-[15rem] backdrop-blur-lg  rounded-lg flex items-center">
             <div class="m-12"> 
+                <audio id="MyAudioElement" autoplay>
+                    <source src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">Maghrib</h1>
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">{{ $response->data->jadwal[$d-1]->maghrib }}</h1>
+
+                                <script>
+                                    let date = new Date();
+                                    let hours = date.getHours();
+                                    let minutes = date.getMinutes();
+                                    let seconds = date.getSeconds();  
+                                    
+                                            if (hours == {{$jam_maghrib}} && minutes == {{$menit_maghrib}}) {
+                                                console.log('berhasil_maghrib');
+                                                Audio.prototype.play = (function(play) {
+                                                return function () {
+                                                var audio = this,
+                                                    args = arguments,
+                                                    promise = play.apply(audio, args);
+                                                if (promise !== undefined) {
+                                                    promise.catch(_ => {
+                                                    // Autoplay was prevented. This is optional, but add a button to start playing.
+                                                    // var el = document.createElement("button");
+                                                    // el.innerHTML = "Play";
+                                                    // el.addEventListener("click", function(){play.apply(audio, args);});
+                                                    // this.parentNode.insertBefore(el, this.nextSibling)
+                                                    });
+                                                }
+                                                };
+                                                })(Audio.prototype.play);
+
+                                                // Try automatically playing our audio via script. This would normally trigger and error.
+                                                document.getElementById('MyAudioElement').play()
+                                            } else {
+                                                console.log('gagal_maghrib');
+                                                    
+                                            }
+                                </script>
                 @if ($h <= $jam_maghrib && $h >= $jam_ashar)
                         @if ($h == $jam_maghrib && $m >= $menit_maghrib )
                         @if ($h = $jam_maghrib &&  $m = $menit_maghrib)
@@ -545,8 +557,45 @@
             <div class="flex items-center ">
                 <div class="h-[9rem] w-[15rem] backdrop-blur-lg  rounded-lg flex items-center">
             <div class="m-16"> 
+                <audio id="MyAudioElement" autoplay>
+                    <source src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">Isya</h1>
                 <h1 class="text-white font-extrabold text-4xl flex justify-center items-center">{{ $response->data->jadwal[$d-1]->isya }}</h1>
+
+                <script>
+                                    let date = new Date();
+                                    let hours = date.getHours();
+                                    let minutes = date.getMinutes();
+                                    let seconds = date.getSeconds();  
+                                    
+                                            if (hours == {{$jam_isya}} && minutes == {{$menit_isya}}) {
+                                                console.log('berhasil_isya');
+                                                Audio.prototype.play = (function(play) {
+                                                return function () {
+                                                var audio = this,
+                                                    args = arguments,
+                                                    promise = play.apply(audio, args);
+                                                if (promise !== undefined) {
+                                                    promise.catch(_ => {
+                                                    // Autoplay was prevented. This is optional, but add a button to start playing.
+                                                    // var el = document.createElement("button");
+                                                    // el.innerHTML = "Play";
+                                                    // el.addEventListener("click", function(){play.apply(audio, args);});
+                                                    // this.parentNode.insertBefore(el, this.nextSibling)
+                                                    });
+                                                }
+                                                };
+                                                })(Audio.prototype.play);
+
+                                                // Try automatically playing our audio via script. This would normally trigger and error.
+                                                document.getElementById('MyAudioElement').play()
+                                            } else {
+                                                console.log('gagal_isya');
+                                                    
+                                            }
+                                </script>
                 @if ($h <= $jam_isya && $h >= $jam_maghrib)
                         @if ($h = $jam_isya && $m >= $menit_isya )
                                 @if ($h = $jam_isya &&  $m = $menit_isya) 
